@@ -10,26 +10,105 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
-    
+
     <title>Conversor de Moedas</title>
 </head>
 
 <body>
-    
-<!-- Animação das notas de dinheiro -->
-<div class="money-animation" aria-label="Animação de conversão de moedas">
 
-    <div class="note note-real">
-        <span>R$</span>
+
+    <!-- Animação das notas de dinheiro -->
+    <div class="money-animation" aria-label="Animação de conversão de moedas">
+
+        <svg class="money-svg" viewBox="0 0 300 170" role="img" aria-hidden="true">
+
+            <defs>
+                <!-- Gradientes da nota verde -->
+                <linearGradient id="greenBill" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#a5ff38" />
+                    <stop offset="100%" stop-color="#43c92c" />
+                </linearGradient>
+
+                <!-- Gradientes da nota azul -->
+                <linearGradient id="blueBill" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#72efff" />
+                    <stop offset="100%" stop-color="#00a9ed" />
+                </linearGradient>
+
+                <filter id="billShadow" x="-30%" y="-30%" width="160%" height="170%">
+                    <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#24105b" flood-opacity=".35" />
+                </filter>
+            </defs>
+
+            <!-- Seta superior -->
+            <path class="arrow arrow-top" d="M112 28 C126 5 157 2 177 15" fill="none" stroke="#ffffff" stroke-width="4"
+                stroke-linecap="round" />
+            <path d="M168 5 L181 17 L165 21" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"
+                stroke-linejoin="round" />
+
+            <!-- Seta inferior -->
+            <path class="arrow arrow-bottom" d="M188 137 C174 160 143 163 123 150" fill="none" stroke="#ffffff"
+                stroke-width="4" stroke-linecap="round" />
+            <path d="M132 161 L119 149 L135 145" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"
+                stroke-linejoin="round" />
+
+            <!-- Detalhes de brilho à esquerda -->
+            <g class="sparkles" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round">
+                <path d="M25 45 L19 38" />
+                <path d="M17 59 L9 58" />
+                <path d="M30 29 L28 20" />
+                <path d="M273 39 L280 31" />
+                <path d="M282 53 L290 51" />
+                <path d="M266 25 L267 17" />
+            </g>
+
+            <!-- Nota verde: real brasileiro -->
+            <g class="bill bill-real" filter="url(#billShadow)">
+                <g transform="rotate(-8 100 77)">
+                    <rect x="35" y="47" width="105" height="57" rx="7" fill="#173b1a" />
+                    <rect x="38" y="49" width="99" height="53" rx="5" fill="url(#greenBill)" stroke="#173b1a"
+                        stroke-width="1.5" />
+
+                    <!-- Moldura interna -->
+                    <path d="M48 58 H62 Q68 58 68 53
+                         M108 53 Q108 59 119 59 V91
+                         Q108 91 108 97 H48
+                         Q48 90 42 90 V63 Q49 63 48 58" fill="none" stroke="#267d24" stroke-width="2.5" />
+
+                    <!-- Círculo e símbolo -->
+                    <circle cx="87" cy="76" r="17" fill="#249b20" />
+                    <text x="87" y="82" text-anchor="middle" font-size="17" font-weight="bold" fill="#d9ff91">R$</text>
+
+                    <!-- Brilho da nota -->
+                    <path d="M48 53 H88" stroke="#e5ffb4" stroke-width="2" stroke-linecap="round" />
+                </g>
+            </g>
+
+            <!-- Nota azul: dólar americano -->
+            <g class="bill bill-dollar" filter="url(#billShadow)">
+                <g transform="rotate(-3 207 73)">
+                    <rect x="158" y="42" width="105" height="57" rx="7" fill="#103d65" />
+                    <rect x="161" y="44" width="99" height="53" rx="5" fill="url(#blueBill)" stroke="#103d65"
+                        stroke-width="1.5" />
+
+                    <!-- Moldura interna -->
+                    <path d="M171 53 H185 Q191 53 191 48
+                         M231 48 Q231 54 242 54 V86
+                         Q231 86 231 92 H171
+                         Q171 85 165 85 V58 Q172 58 171 53" fill="none" stroke="#087bb7" stroke-width="2.5" />
+
+                    <!-- Círculo e símbolo -->
+                    <circle cx="210" cy="70" r="17" fill="#0878ba" />
+                    <text x="210" y="77" text-anchor="middle" font-size="22" font-weight="bold" fill="#d8faff">$</text>
+
+                    <!-- Brilho da nota -->
+                    <path d="M171 48 H211" stroke="#d8ffff" stroke-width="2" stroke-linecap="round" />
+                </g>
+            </g>
+
+        </svg>
     </div>
 
-    <div class="exchange-arrow">⇄</div>
-
-    <div class="note note-dollar">
-        <span>$</span>
-    </div>
-
-</div>
 
     <main>
         <label>
@@ -45,6 +124,7 @@
                 <option value="dolar">US$ Dólar Americano</option>
                 <option value="euro">€ Euro</option>
                 <option value="libra">£ Libra</option>
+                <option value="yuan">¥ Yuan Chinês</option>
             </select>
         </label>
 
@@ -57,7 +137,7 @@
 
         <section>
             <div class="currency-box">
-                <img class="BRAflag"src="./assets/BRL.png" alt="converter-brl">
+                <img class="BRAflag" src="./assets/BRA.png" alt="converter-brl">
                 <p class="currency">Real</p>
                 <p class="currency-value">R$ 0,00</p>
             </div>
@@ -65,7 +145,7 @@
             <img class="arrow" src="./assets/Vector.png" alt="seta">
 
             <div class="currency-box">
-                <img class="USAflag" src="./assets/dolarEUA.png" alt="convertida-dolar">
+                <img class="USAflag" src="./assets/EUA.png" alt="convertida-dolar">
                 <p class="currency" id="currency-name">Dólar Americano</p>
                 <p class="converted-currency-value">US$ 0,00</p>
             </div>

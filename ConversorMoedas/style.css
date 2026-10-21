@@ -109,91 +109,115 @@ section {
 }
 
 
-/* Área da animação */
+/* Área da ilustração */
 .money-animation {
     position: relative;
     width: 280px;
     height: 160px;
-    margin: 0 auto 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 20px auto 20px;
 }
 
-/* Estilo compartilhado pelas notas */
-.note {
-    width: 130px;
-    height: 75px;
-    border: 3px solid #222;
-    border-radius: 8px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 32px;
-    font-weight: bold;
-    box-shadow: 0 5px 10px #0002;
-
-    position: absolute;
+/* SVG ocupa a área da animação */
+.money-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
 }
 
-/* Nota de real */
-.note-real {
-    background: #65d84a;
-    color: #174d12;
-    left: 10px;
-    top: 25px;
-    z-index: 2;
+/* Movimento da nota verde */
+.bill-real {
+    transform-box: view-box;
+    transform-origin: 87px 76px;
+    animation: floatReal 2.5s ease-in-out infinite;
 }
 
-/* Nota de dólar */
-.note-dollar {
-    background: #80d9f2;
-    color: #174e70;
-    right: 10px;
-    bottom: 25px;
-    z-index: 1;
+/* Movimento da nota azul */
+.bill-dollar {
+    transform-box: view-box;
+    transform-origin: 210px 70px;
+    animation: floatDollar 2.5s ease-in-out infinite;
 }
 
-/* Símbolo de conversão */
-.exchange-arrow {
-    position: absolute;
-    font-size: 42px;
-    color: white;
-    z-index: 3;
+/* Movimento sutil das setas */
+.arrow-top {
+    animation: arrowTop 2.5s ease-in-out infinite;
 }
 
-
-/* Movimento da nota de real */
-.note-real {
-    animation: moveReal 2.5s ease-in-out infinite;
+.arrow-bottom {
+    animation: arrowBottom 2.5s ease-in-out infinite;
 }
 
-/* Movimento da nota de dólar */
-.note-dollar {
-    animation: moveDollar 2.5s ease-in-out infinite;
+/* Pequena pulsação dos brilhos */
+.sparkles {
+    transform-box: view-box;
+    transform-origin: center;
+    animation: sparkle 1.8s ease-in-out infinite alternate;
 }
 
-/* A nota verde flutua */
-@keyframes moveReal {
+/* A nota verde flutua para cima */
+@keyframes floatReal {
     0%, 100% {
-        transform: translate(0, 0) rotate(-5deg);
+        transform: translate(0, 0) rotate(0deg);
     }
 
     50% {
-        transform: translate(12px, -12px) rotate(3deg);
+        transform: translate(-3px, -5px) rotate(-2deg);
     }
 }
 
-/* A nota azul flutua no sentido contrário */
-@keyframes moveDollar {
+/* A nota azul se movimenta no sentido oposto */
+@keyframes floatDollar {
     0%, 100% {
-        transform: translate(0, 0) rotate(5deg);
+        transform: translate(0, 0) rotate(0deg);
     }
 
     50% {
-        transform: translate(-12px, 12px) rotate(-3deg);
+        transform: translate(3px, 5px) rotate(2deg);
+    }
+}
+
+@keyframes arrowTop {
+    0%, 100% {
+        opacity: 0.8;
+        transform: translateY(2px);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-2px);
+    }
+}
+
+@keyframes arrowBottom {
+    0%, 100% {
+        opacity: 1;
+        transform: translateY(-2px);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: translateY(2px);
+    }
+}
+
+@keyframes sparkle {
+    from {
+        opacity: 0.55;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Respeita a preferência por movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+    .bill-real,
+    .bill-dollar,
+    .arrow-top,
+    .arrow-bottom,
+    .sparkles {
+        animation: none;
     }
 }
